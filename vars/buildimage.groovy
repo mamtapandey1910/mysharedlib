@@ -1,10 +1,11 @@
-import org.jenkinsci.plugins.docker.workflow.*
-import org.jenkinsci.plugins.workflow.cps.CpsScript
-
-
-static builder(script, DSL steps) {
-    // create the image to use in this build instead of using a parameter
-    def docker script.getClass().getClassLoader().loadClass("org.jenkinsci.plugins.docker.workflow.Docker").getConstructor(CpsScript.class).newInstance(script)
-    image = docker.image("hello-world")
-    return new Builder(script, steps, image)
+def call(String project, String hubUser) {
+    sh "docker image build -t ${hubUser}/${project}:beta-${env.BRANCH_NAME}-${env.BUILD_NUMBER} ."
+    withCredentials([usernamePassword(
+            credentialsId: "docker",
+            usernameVariable: "USER",
+            passwordVariable: "PASS"
+    )]) {
+        sh "docker login -u '$USER' -p '$PASS'"
+    }
+    sh "docker image push ${hubUser}/${project}:beta-${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
 }
