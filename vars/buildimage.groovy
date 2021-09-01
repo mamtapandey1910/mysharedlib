@@ -1,4 +1,4 @@
 static call(){
     withDockerRegistry([credentialsId: 'Dockerhub', url: 'docker.io/mamtapandey'])
-    sh 'docker pull "hello-world"'
+    sh 'docker pull hello-world'
 }
