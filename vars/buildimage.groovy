@@ -1,4 +1,4 @@
-static builder(Map params){
+static builder(String params){
     withCredentials([usernamePassword(credentialsId: 'myregistry-login', passwordVariable: 'mamtapandey@587', usernameVariable: 'mamtapandey')])
-    sh 'docker run ${params.name}'
+    sh 'docker run params'
 }
