@@ -1,3 +1,3 @@
 static call(){
-    sh 'docker pull hello-world'
+    sh 'sudo docker pull hello-world'
 }
