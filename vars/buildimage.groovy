@@ -1,4 +1,4 @@
-static builder(String params){
-    withCredentials([usernamePassword(credentialsId: 'myregistry-login', passwordVariable: 'mamtapandey@587', usernameVariable: 'mamtapandey')])
-    sh 'docker run params'
+static builder(){
+    withDockerRegistry([credentialsId: 'Dockerhub', url: 'docker.io/mamtapandey'])
+    sh 'docker pull "hello-world"'
 }
