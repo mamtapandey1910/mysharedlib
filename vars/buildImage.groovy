@@ -1,3 +1,3 @@
 def call(){
-    sh 'docker pull hello-world'
+    sh 'docker run hello-world'
 }
